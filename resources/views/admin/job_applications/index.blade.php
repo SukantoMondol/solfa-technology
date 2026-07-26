@@ -9,7 +9,7 @@
         <a href="{{ route('admin.job-applications.index') }}" class="tab-link active" style="font-weight: 700; font-size: 15px; color: #7c3aed; text-decoration: none; border-bottom: 3px solid #7c3aed; padding: 8px 12px; margin-bottom: -2px;">Applications Received</a>
     </div>
 
-    <div class="card" style="background: #ffffff; border-radius: 10px; border: 1px solid #e5e7eb; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+    <div class="card" style="background: #ffffff; border-radius: 10px; border: 1px solid #e5e7eb; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); width: 100%;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
             <div>
                 <h2 style="margin: 0; font-size: 18px; font-weight: 700; color: #334155;">Applications Received</h2>
