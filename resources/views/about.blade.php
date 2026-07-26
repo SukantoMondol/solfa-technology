@@ -20,11 +20,10 @@
     <section class="about-history-section">
         <div class="container">
             <div class="about-history-grid">
-                <div class="about-history-image">
+                <div class="about-history-image" data-aos="fade-right">
                     <img src="{{ asset('images/about_workspace_main.png') }}" alt="Our Workspace" class="about-history-img">
                 </div>
-                <div class="about-history-content">
-                    <span class="about-history-eyebrow">HISTORY</span>
+                <div class="about-history-content" data-aos="fade-left" data-aos-delay="150">
                     <h2 class="about-history-title">Our Company History</h2>
                     <p class="about-history-desc">{{ $site['about_text'] ?? 'Founded with a passion for creativity and technology, our company started as a small digital studio and has grown into a full-service agency. Over time, we have helped businesses transform their ideas into powerful, successful brands.' }}</p>
                 </div>
@@ -36,13 +35,12 @@
     <section class="about-mission-section">
         <div class="container">
             <div class="about-mission-grid">
-                <div class="about-mission-content">
-                    <span class="about-mission-eyebrow">MISSION</span>
+                <div class="about-mission-content" data-aos="fade-right">
                     <h2 class="about-mission-title">Our Mission</h2>
                     <p class="about-mission-desc">{{ $site['mission'] ?? 'Our mission is to empower businesses with smart, creative, and result-driven digital solutions. We aim to deliver high-quality services in web development, design, and marketing that help brands grow, connect with their audience, and achieve measurable success.' }}</p>
-                    <button type="button" onclick="openMeetingSchedulerModal()" class="btn btn-primary about-action-btn">Contact Us</button>
+                    <button type="button" onclick="openMeetingSchedulerModal()" class="btn btn-primary about-action-btn" data-aos="fade-up" data-aos-delay="200">Contact Us</button>
                 </div>
-                <div class="about-mission-image">
+                <div class="about-mission-image" data-aos="fade-left" data-aos-delay="150">
                     <img src="{{ asset('images/about_team_overlay.png') }}" alt="Our Mission" class="about-mission-img">
                 </div>
             </div>
@@ -53,14 +51,13 @@
     <section class="about-vision-section">
         <div class="container">
             <div class="about-vision-grid">
-                <div class="about-vision-image">
+                <div class="about-vision-image" data-aos="fade-right">
                     <img src="{{ asset('images/why_choose_us_laptop.png') }}" alt="Our Vision" class="about-vision-img">
                 </div>
-                <div class="about-vision-content">
-                    <span class="about-vision-eyebrow">VISION</span>
+                <div class="about-vision-content" data-aos="fade-left" data-aos-delay="150">
                     <h2 class="about-vision-title">Our Vision</h2>
                     <p class="about-vision-desc">{{ $site['vision'] ?? 'Our vision is to become a leading global digital agency known for innovation, trust, and impactful solutions. We strive to shape the future of digital experiences by helping businesses transform their ideas into powerful, successful brands.' }}</p>
-                    <button type="button" onclick="openMeetingSchedulerModal()" class="btn btn-primary about-action-btn">Contact Us</button>
+                    <button type="button" onclick="openMeetingSchedulerModal()" class="btn btn-primary about-action-btn" data-aos="fade-up" data-aos-delay="200">Contact Us</button>
                 </div>
             </div>
         </div>
@@ -69,8 +66,7 @@
     {{-- Delivered Projects Banner --}}
     <section class="about-delivered-banner">
         <div class="about-delivered-overlay"></div>
-        <div class="container about-delivered-container">
-            <span class="about-delivered-eyebrow">PROJECTS</span>
+        <div class="container about-delivered-container" data-aos="zoom-in">
             <h2>Since 2018, Solfa Technologies Has Delivered 5000+ Successful Projects</h2>
             <p>Since our journey began, Solfa Technologies has successfully delivered thousands of projects with a strong focus on quality, innovation, and client satisfaction.</p>
             <button type="button" onclick="openMeetingSchedulerModal()" class="btn btn-primary about-action-btn">Get Started Now</button>
@@ -81,15 +77,14 @@
     @if($teamMembers->isNotEmpty())
         <section class="about-team-section">
             <div class="container">
-                <div class="section-head text-center">
-                    <span class="about-team-eyebrow">OUR TEAM</span>
+                <div class="section-head text-center" data-aos="fade-up">
                     <h2 class="about-team-title">Meet Our Experts</h2>
-                    <p class="about-team-subtitle">Tuba IT's dedicated team of developers, designers, and digital marketing experts works collaboratively to deliver innovative, reliable, and result-driven IT solutions.</p>
+                    <p class="about-team-subtitle">Solfa Technologies dedicated team of developers, designers, and digital marketing experts works collaboratively to deliver innovative, reliable, and result-driven IT solutions.</p>
                 </div>
                 
                 <div class="about-team-grid">
                     @foreach($teamMembers as $member)
-                        <div class="team-card-premium">
+                        <div class="team-card-premium" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                             <div class="team-card-image-box">
                                 <img src="{{ asset($member->image) }}" alt="{{ $member->name }}" class="team-img">
                                 <div class="team-card-glow"></div>

@@ -301,7 +301,7 @@ section {
 
 /* Specific Link Color Overrides to prevent global .main-nav a pollution */
 .main-nav .mega-menu a {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
   font-size: 0.88rem !important;
   font-weight: 600 !important;
   border-bottom: none !important;
@@ -329,19 +329,19 @@ section {
   flex-direction: column;
   gap: 20px;
   text-align: left;
-  background: #090e14 !important; /* Deep dark slate card matching the reference screenshot */
-  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  background: #111726 !important; /* Lighter distinct slate-purple card background */
+  border: 1px solid rgba(168, 85, 247, 0.22) !important;
   border-radius: 16px !important;
   padding: 24px 20px !important;
   transition: all 0.3s ease !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
 .mega-menu-col:hover {
-  border-color: rgba(168, 85, 247, 0.25) !important;
-  background: #0d141e !important;
+  border-color: rgba(168, 85, 247, 0.5) !important;
+  background: #172033 !important;
   transform: translateY(-4px) !important;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5) !important;
+  box-shadow: 0 15px 35px rgba(124, 58, 237, 0.35) !important;
 }
 
 /* Header link style overrides */
@@ -450,9 +450,9 @@ section {
 
 .nav-toggle span {
   display: block;
-  width: 24px;
+  width: 25px;
   height: 3px;
-  background: var(--ink);
+  background: #ffffff !important; /* Bright white 3-bar hamburger icon */
   margin: 5px 0;
   border-radius: 2px;
 }
@@ -578,35 +578,41 @@ section {
   flex-shrink: 0;
 }
 
-/* Position each badge around the edges */
+/* Position each badge around the edges: 3 on Right, 3 on Left */
 .orbit-badge:nth-child(1) {
   top: 18%;
-  right: 8%;
+  right: 6%;
   animation-name: orbitFadeIn, orbitFloat1;
 }
 
 .orbit-badge:nth-child(2) {
-  top: 38%;
+  top: 45%;
   right: 4%;
   animation-name: orbitFadeIn, orbitFloat2;
 }
 
 .orbit-badge:nth-child(3) {
-  bottom: 30%;
+  bottom: 20%;
   right: 6%;
   animation-name: orbitFadeIn, orbitFloat3;
 }
 
 .orbit-badge:nth-child(4) {
-  top: 22%;
-  left: 5%;
+  top: 18%;
+  left: 6%;
   animation-name: orbitFadeIn, orbitFloat4;
 }
 
 .orbit-badge:nth-child(5) {
-  bottom: 25%;
+  top: 45%;
   left: 4%;
   animation-name: orbitFadeIn, orbitFloat5;
+}
+
+.orbit-badge:nth-child(6) {
+  bottom: 20%;
+  left: 6%;
+  animation-name: orbitFadeIn, orbitFloat1;
 }
 
 @keyframes orbitFadeIn {
@@ -2583,13 +2589,86 @@ section {
 @media (max-width: 992px) {
   .footer-top-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 35px;
+    gap: 32px 24px;
+  }
+
+  .footer-directory-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 640px) {
+  .site-footer {
+    padding: 40px 0 20px !important;
+  }
+
   .footer-top-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px 16px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .footer-col-brand {
+    grid-column: span 2 !important;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-brand-desc {
+    max-width: 100% !important;
+    font-size: 0.86rem !important;
+    margin-bottom: 16px !important;
+  }
+
+  .footer-social-circles {
+    justify-content: center;
+  }
+
+  .footer-col-title {
+    font-size: 1.02rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .footer-link-list {
+    gap: 8px !important;
+  }
+
+  .footer-link-list li a {
+    font-size: 0.85rem !important;
+  }
+
+  .footer-contact-list {
+    gap: 10px !important;
+  }
+
+  .footer-contact-list li {
+    font-size: 0.83rem !important;
+  }
+
+  .footer-divider {
+    margin: 20px 0 24px !important;
+  }
+
+  .footer-directory-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px 14px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .directory-col-title {
+    font-size: 0.92rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  .directory-link-list {
+    gap: 6px !important;
+  }
+
+  .directory-link-list li a {
+    font-size: 0.8rem !important;
   }
 }
 
@@ -2749,19 +2828,6 @@ section {
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
   margin-bottom: 40px;
-}
-
-@media (max-width: 992px) {
-  .footer-directory-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
-}
-
-@media (max-width: 576px) {
-  .footer-directory-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 .directory-col-title {
@@ -3005,62 +3071,98 @@ section {
    Responsive
    ========================================================================== */
 @media (max-width: 860px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    background: #0d0b1a !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-toggle {
+    display: block !important;
+  }
+
+  .nav-toggle span {
+    background: #ffffff !important;
+  }
+
   .main-nav {
     display: none;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 70px;
     left: 0;
-    right: 0;
-    background: #fff;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background: #090716 !important;
     flex-direction: column;
     gap: 0;
-    border-bottom: 1px solid var(--border);
-    padding: 10px 4%;
+    padding: 20px 24px 80px;
+    overflow-y: auto;
+    z-index: 99998;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
   }
 
   .main-nav.open {
-    display: flex;
+    display: flex !important;
   }
 
-  .main-nav a {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+  .main-nav > a {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 16px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    text-align: center;
+    display: block;
   }
 
-  /* Mobile Dropdown Styling */
+  .main-nav > a:hover,
+  .main-nav > a.active {
+    color: #a78bfa !important;
+  }
+
   .nav-dropdown-wrapper {
     width: 100%;
   }
 
   .nav-dropdown-trigger {
+    color: #e2e8f0 !important;
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 14px 8px;
     width: 100%;
-    justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    text-align: center;
   }
 
   .mega-menu {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    background: var(--surface-alt);
-    border-radius: 8px;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-    border: none;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
     position: static;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
+    transform: none !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
   }
 
   .nav-dropdown-wrapper.open .mega-menu {
-    max-height: 2000px;
-    padding: 20px;
-    margin: 8px 0;
-    background: #090617; /* Dark theme consistent on mobile */
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-height: 2500px;
+    opacity: 1;
+    padding: 12px 0 !important;
   }
 
   .nav-dropdown-wrapper.open .dropdown-chevron {
@@ -3069,19 +3171,33 @@ section {
 
   .mega-menu-grid-5col {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 8px;
   }
 
-  .mega-menu-sub-links {
-    padding-left: 12px;
-    gap: 10px;
+  .mega-menu-col {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+    padding: 12px 16px !important;
+    gap: 0 !important;
+    box-shadow: none !important;
+    text-align: center !important;
   }
 
+  .main-nav .mega-menu a.mega-menu-col-header {
+    font-size: 0.98rem !important;
+    font-weight: 700 !important;
+    color: #e2e8f0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .arrow-badge,
+  .mega-menu-sub-links,
   .mega-menu-footer-premium {
-    justify-content: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    margin-top: 16px;
-    padding-top: 12px;
+    display: none !important;
   }
 
   .nav-toggle {
@@ -6442,6 +6558,134 @@ section {
   transition: all 0.3s ease;
   box-shadow: 0 8px 25px rgba(168, 85, 247, 0.25);
   cursor: pointer;
+}
+
+/* ==========================================================================
+   Futuristic Sci-Fi Visual Effects & Smooth Animations
+   ========================================================================== */
+
+/* 1. Animated Metallic & Neon Gradient Headings */
+.accent-title,
+.section-eyebrow {
+  background: linear-gradient(90deg, #a78bfa, #c084fc, #818cf8, #a78bfa);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineGradient 6s linear infinite;
+  letter-spacing: 2px !important;
+  font-weight: 800 !important;
+}
+
+@keyframes shineGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 2. Floating Cyber Glass Card Animation */
+.service-card,
+.offer-card-premium,
+.project-card,
+.stat-card,
+.stat-glowing-node,
+.why-choose-card-tubait {
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+}
+
+.service-card:hover,
+.offer-card-premium:hover,
+.project-card:hover,
+.stat-glowing-node:hover,
+.why-choose-card-tubait:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  box-shadow: 0 16px 40px rgba(124, 58, 237, 0.3), 0 0 20px rgba(167, 139, 250, 0.2) !important;
+}
+
+/* 3. Glowing Neon Button Pulse */
+.btn-primary,
+.cta-btn,
+.service-get-started-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.35s ease !important;
+}
+
+.btn-primary::before,
+.cta-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+  transform: scale(0);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.btn-primary:hover::before,
+.cta-btn:hover::before {
+  transform: scale(1);
+}
+
+.btn-primary:hover,
+.cta-btn:hover {
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.6), 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-3px) scale(1.03) !important;
+}
+
+/* 4. Sci-Fi Floating Orbs Backdrops */
+.hero-immersive,
+.services-hero-banner,
+.service-details-hero,
+.services-cta-section {
+  position: relative;
+}
+
+.hero-immersive::after,
+.service-details-hero::after {
+  content: '';
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 10%;
+  right: 5%;
+  pointer-events: none;
+  animation: floatingOrb 10s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes floatingOrb {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(-30px, 40px) scale(1.2); opacity: 0.8; }
+  100% { transform: translate(20px, -20px) scale(0.9); opacity: 0.5; }
+}
+
+/* 5. Smooth Tech Item Floating Micro-Animations */
+.tech-item-card {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.tech-item-card:hover {
+  transform: translateY(-6px) rotate(1deg) !important;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(167, 139, 250, 0.1)) !important;
+  border-color: rgba(167, 139, 250, 0.5) !important;
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3) !important;
+}
+
+/* 6. FAQ Accordion Smooth Expansion Glow */
+.faq-item-premium {
+  transition: all 0.35s ease !important;
+}
+
+.faq-item-premium.active {
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.2) !important;
+  background: rgba(17, 14, 34, 0.8) !important;
 }
 
 .submit-btn-premium:hover {

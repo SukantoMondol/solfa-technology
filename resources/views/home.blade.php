@@ -16,17 +16,18 @@
 
         {{-- Floating Service Orbit Badges --}}
         <div class="hero-orbit-container" aria-hidden="true">
-            @forelse ($services->take(5) as $index => $service)
-                <div class="orbit-badge" style="--orbit-i: {{ $index }}; --orbit-total: 5">
+            @forelse ($services->take(6) as $index => $service)
+                <div class="orbit-badge" style="--orbit-i: {{ $index }}; --orbit-total: 6">
                     <span class="orbit-badge-dot"></span>
                     <span>{{ $service->title }}</span>
                 </div>
             @empty
-                <div class="orbit-badge" style="--orbit-i: 0; --orbit-total: 5"><span class="orbit-badge-dot"></span><span>Web Development</span></div>
-                <div class="orbit-badge" style="--orbit-i: 1; --orbit-total: 5"><span class="orbit-badge-dot"></span><span>SEO Optimization</span></div>
-                <div class="orbit-badge" style="--orbit-i: 2; --orbit-total: 5"><span class="orbit-badge-dot"></span><span>Graphics Design</span></div>
-                <div class="orbit-badge" style="--orbit-i: 3; --orbit-total: 5"><span class="orbit-badge-dot"></span><span>Digital Marketing</span></div>
-                <div class="orbit-badge" style="--orbit-i: 4; --orbit-total: 5"><span class="orbit-badge-dot"></span><span>Social Media Strategy</span></div>
+                <div class="orbit-badge" style="--orbit-i: 0; --orbit-total: 6"><span class="orbit-badge-dot"></span><span>Web Development</span></div>
+                <div class="orbit-badge" style="--orbit-i: 1; --orbit-total: 6"><span class="orbit-badge-dot"></span><span>SEO Optimization</span></div>
+                <div class="orbit-badge" style="--orbit-i: 2; --orbit-total: 6"><span class="orbit-badge-dot"></span><span>Graphics Design</span></div>
+                <div class="orbit-badge" style="--orbit-i: 3; --orbit-total: 6"><span class="orbit-badge-dot"></span><span>Digital Marketing</span></div>
+                <div class="orbit-badge" style="--orbit-i: 4; --orbit-total: 6"><span class="orbit-badge-dot"></span><span>Mobile App Development</span></div>
+                <div class="orbit-badge" style="--orbit-i: 5; --orbit-total: 6"><span class="orbit-badge-dot"></span><span>Social Media Strategy</span></div>
             @endforelse
         </div>
 
@@ -157,17 +158,17 @@
     <section class="about-section" id="about">
         <div class="container about-container-grid">
             {{-- Left: Dual Image Showcase (Main Workspace + Floating Overlay Team) --}}
-            <div class="about-media-wrapper">
+            <div class="about-media-wrapper" data-aos="fade-right" data-aos-duration="900">
                 <div class="about-main-image-box">
                     <img src="{{ asset('images/about_workspace_main.png') }}" alt="Solfa Technologies Workspace" class="about-main-img">
                 </div>
-                <div class="about-overlay-image-box">
+                <div class="about-overlay-image-box" data-aos="zoom-in" data-aos-delay="300">
                     <img src="{{ asset('images/about_team_overlay.png') }}" alt="Solfa Technologies Team Collaboration" class="about-overlay-img">
                 </div>
             </div>
 
             {{-- Right: Content & Icon Features --}}
-            <div class="about-content-wrapper">
+            <div class="about-content-wrapper" data-aos="fade-left" data-aos-duration="900" data-aos-delay="150">
                 <span class="about-badge">ABOUT US</span>
                 <h2 class="about-title">{{ $site['site_name'] ?? 'Solfa Technologies' }} {{ $site['about_title'] ?? 'Smart Solutions for Digital Growth' }}</h2>
                 <p class="about-description">
@@ -176,7 +177,7 @@
 
                 {{-- Feature Rows with Custom Icon Badges --}}
                 <div class="about-feature-rows">
-                    <div class="about-feature-item">
+                    <div class="about-feature-item" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon-badge feature-icon-badge--rocket">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.71.79-1.81.2-2.55L4.5 16.5z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-3.05 11a22.35 22.35 0 0 1-3.95 2z"></path><path d="M9 18l3 3"></path><path d="M14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"></path></svg>
                         </div>
@@ -186,7 +187,7 @@
                         </div>
                     </div>
 
-                    <div class="about-feature-item">
+                    <div class="about-feature-item" data-aos="fade-up" data-aos-delay="300">
                         <div class="feature-icon-badge feature-icon-badge--code">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                         </div>
@@ -196,7 +197,7 @@
                         </div>
                     </div>
 
-                    <div class="about-feature-item">
+                    <div class="about-feature-item" data-aos="fade-up" data-aos-delay="400">
                         <div class="feature-icon-badge feature-icon-badge--trust">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
                         </div>
@@ -208,7 +209,7 @@
                 </div>
 
                 {{-- Action Button --}}
-                <div class="about-action">
+                <div class="about-action" data-aos="fade-up" data-aos-delay="450">
                     <a href="{{ route('about') }}" class="btn-discover-more">
                         <span>Discover More</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -221,7 +222,7 @@
     {{-- ============================= POPULAR SERVICES ============================= --}}
     <section class="services-section-modern" id="services">
         <div class="container">
-            <div class="section-head text-center">
+            <div class="section-head text-center" data-aos="fade-up">
                 <span class="services-eyebrow-modern">POPULAR SERVICES</span>
                 <h2 class="services-title-modern">Smart Digital Services That Drive Growth</h2>
                 <p class="services-subtitle-modern">Comprehensive digital and IT services designed to increase visibility, enhance user experience, and support long-term business growth.</p>
@@ -240,7 +241,7 @@
                         elseif (str_contains($t, 'software') || str_contains($t, 'app')) $iconType = 'software';
                     @endphp
 
-                    <article class="service-card-modern">
+                    <article class="service-card-modern" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index % 3 + 1) }}">
                         <div class="service-card-header">
                             <span class="service-num-modern">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                             <div class="service-icon-badge service-icon-badge--{{ $iconType }}">

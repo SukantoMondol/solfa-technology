@@ -24,8 +24,7 @@
         <section class="career-intro-section">
             <div class="container">
                 <div class="career-intro-grid">
-                    <div class="career-intro-text">
-                        <span class="career-eyebrow">WITH US</span>
+                    <div class="career-intro-text" data-aos="fade-right">
                         <h2 class="career-heading">Build the Future of Digital</h2>
                         <p class="career-desc">
                             We are always looking for passionate, curious, and talented individuals to join our team.
@@ -34,21 +33,21 @@
                             and accelerate your career growth in an empowering, collaborative environment.
                         </p>
                         <div class="career-intro-stats">
-                            <div class="stat-pill">
+                            <div class="stat-pill" data-aos="zoom-in" data-aos-delay="100">
                                 <span class="stat-num">35+</span>
                                 <span class="stat-lbl">Team Members</span>
                             </div>
-                            <div class="stat-pill">
+                            <div class="stat-pill" data-aos="zoom-in" data-aos-delay="200">
                                 <span class="stat-num">250+</span>
                                 <span class="stat-lbl">Projects Delivered</span>
                             </div>
-                            <div class="stat-pill">
+                            <div class="stat-pill" data-aos="zoom-in" data-aos-delay="300">
                                 <span class="stat-num">100%</span>
                                 <span class="stat-lbl">Growth Culture</span>
                             </div>
                         </div>
                     </div>
-                    <div class="career-intro-image-wrap">
+                    <div class="career-intro-image-wrap" data-aos="fade-left" data-aos-delay="150">
                         <div class="career-image-card">
                             <img src="{{ asset('images/career-office.jpg') }}" alt="Life at Solfa Technologies"
                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80';">
@@ -62,9 +61,8 @@
         <!-- 3. Open Positions Section -->
         <section class="career-positions-section" id="open-positions">
             <div class="container">
-                <div class="career-positions-header">
-                    <span class="career-eyebrow">OPEN POSITIONS</span>
-                    <h2 class="career-heading">Find your role</h2>
+                <div class="career-positions-header" data-aos="fade-up">
+                    <h2 class="career-heading">Find Your Ideal Role</h2>
                 </div>
 
                 @if(session('success'))
@@ -75,7 +73,7 @@
 
                 <div class="job-list-container">
                     @forelse ($jobs as $job)
-                        <div class="job-listing-card">
+                        <div class="job-listing-card" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                             <!-- Left Info -->
                             <div class="job-card-left">
                                 <h3 class="job-title">{{ $job->title }}</h3>

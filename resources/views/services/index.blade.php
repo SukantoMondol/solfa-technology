@@ -21,7 +21,7 @@
         <div class="container">
             <div class="services-page-grid">
                 @foreach ($services as $service)
-                    <div class="service-page-card">
+                    <div class="service-page-card" data-aos="fade-up" data-aos-delay="{{ 100 * ($loop->index % 3 + 1) }}">
                         <span class="service-card-number">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                         
                         <div class="service-card-top">
