@@ -20,7 +20,7 @@ class PageController extends Controller
             'featuredProjects' => Project::active()->where('is_featured', true)->take(6)->get(),
             'testimonials' => Testimonial::active()->get(),
             'faqs' => Faq::active()->get(),
-            'categories' => Project::active()->whereNotNull('category')->distinct()->pluck('category'),
+            'categories' => Project::where('is_active', true)->whereNotNull('category')->pluck('category')->unique(),
         ]);
     }
 
