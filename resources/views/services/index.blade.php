@@ -49,7 +49,7 @@
 
                         {{-- Sub-services list --}}
                         <div class="service-card-sublist">
-                            @if(Str::slug($service->title) == 'graphics-design')
+                            @if(\Illuminate\Support\Str::slug($service->title) == 'graphics-design')
                                 <ul>
                                     <li>Logo Design</li>
                                     <li>Brand Identity Design</li>
@@ -57,7 +57,7 @@
                                     <li>Print Design</li>
                                     <li>Video Editor</li>
                                 </ul>
-                            @elseif(Str::slug($service->title) == 'web-development')
+                            @elseif(\Illuminate\Support\Str::slug($service->title) == 'web-development')
                                 <ul>
                                     <li>E-commerce Website</li>
                                     <li>WordPress Customization</li>
@@ -66,7 +66,7 @@
                                     <li>Wix Development</li>
                                     <li>Web Applications</li>
                                 </ul>
-                            @elseif(Str::slug($service->title) == 'seo-optimization')
+                            @elseif(\Illuminate\Support\Str::slug($service->title) == 'seo-optimization')
                                 <ul>
                                     <li>Keyword Research</li>
                                     <li>On-Page SEO</li>
@@ -75,7 +75,7 @@
                                     <li>Technical SEO</li>
                                     <li>SEO Audit & Strategy</li>
                                 </ul>
-                            @elseif(Str::slug($service->title) == 'digital-marketing')
+                            @elseif(\Illuminate\Support\Str::slug($service->title) == 'digital-marketing')
                                 <ul>
                                     <li>Marketing Strategy</li>
                                     <li>Email Marketing</li>
@@ -84,7 +84,7 @@
                                     <li>Lead Generation</li>
                                     <li>Content Marketing</li>
                                 </ul>
-                            @elseif(Str::slug($service->title) == 'social-media-strategy')
+                            @elseif(\Illuminate\Support\Str::slug($service->title) == 'social-media-strategy')
                                 <ul>
                                     <li>Analytics & Reporting</li>
                                     <li>Campaign Strategy</li>
@@ -93,7 +93,7 @@
                                     <li>Social Media Advertising</li>
                                     <li>Social Media Management</li>
                                 </ul>
-                            @elseif(Str::slug($service->title) == 'mobile-app-development')
+                            @elseif(\Illuminate\Support\Str::slug($service->title) == 'mobile-app-development')
                                 <ul>
                                     <li>Android App Development</li>
                                     <li>iOS App Development</li>

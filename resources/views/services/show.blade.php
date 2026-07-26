@@ -2,7 +2,7 @@
 
 @php
     // Dynamically define headings and descriptions based on service slug
-    $slug = Str::slug($service->title);
+    $slug = \Illuminate\Support\Str::slug($service->title);
     
     $heroTitle = 'We Build Technology Solutions That Drive Growth';
     $heroTag = strtoupper($service->title) . ' SERVICES';
