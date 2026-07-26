@@ -87,17 +87,21 @@
                                 </td>
                                 <td style="padding: 14px; text-align: center;">
                                     @if ($app->cv_path)
-                                        <a href="{{ route('admin.job-applications.download', $app) }}" style="display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid #4338ca; color: #4338ca; background: #ffffff; font-weight: 700; font-size: 11px; padding: 6px 12px; border-radius: 6px; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.background='#4338ca'; this.style.color='#ffffff';" onmouseout="this.style.background='#ffffff'; this.style.color='#4338ca';">
-                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                            DOWNLOAD
-                                        </a>
+                                        <div style="display: flex; gap: 6px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                                            <a href="{{ route('admin.job-applications.view-cv', $app) }}" target="_blank" style="display: inline-flex; align-items: center; gap: 4px; border: 1.5px solid #4338ca; color: #ffffff; background: #4338ca; font-weight: 700; font-size: 11px; padding: 6px 12px; border-radius: 6px; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(67, 56, 202, 0.2);" title="View CV PDF in new tab">
+                                                📄 VIEW CV
+                                            </a>
+                                            <a href="{{ route('admin.job-applications.download', $app) }}" style="display: inline-flex; align-items: center; gap: 4px; border: 1.5px solid #cbd5e1; color: #475569; background: #f8fafc; font-weight: 700; font-size: 11px; padding: 6px 10px; border-radius: 6px; text-decoration: none; transition: all 0.2s ease;" title="Download CV File">
+                                                📥
+                                            </a>
+                                        </div>
                                     @else
                                         <span style="color: #94a3b8; font-size: 12px;">No CV</span>
                                     @endif
                                 </td>
                                 <td style="padding: 14px; text-align: center;">
                                     <div style="display: flex; gap: 6px; justify-content: center; align-items: center;">
-                                        <button type="button" onclick="showApplicantDetails('{{ addslashes($app->name) }}', '{{ addslashes($app->email) }}', '{{ addslashes($app->phone ?? '') }}', '{{ addslashes($app->job_title) }}', '{{ addslashes($app->cover_letter ?? '') }}', '{{ addslashes($app->portfolio_link ?? '') }}')" title="View Candidate Details" style="background: #7c3aed; color: #ffffff; width: 32px; height: 32px; border: none; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.15s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                        <button type="button" onclick="showApplicantDetails('{{ addslashes($app->name) }}', '{{ addslashes($app->email) }}', '{{ addslashes($app->phone ?? '') }}', '{{ addslashes($app->job_title) }}', '{{ addslashes($app->cover_letter ?? '') }}', '{{ addslashes($app->portfolio_link ?? '') }}', '{{ $app->cv_path ? route('admin.job-applications.view-cv', $app) : '' }}', '{{ $app->cv_path ? route('admin.job-applications.download', $app) : '' }}')" title="View Candidate Details & CV" style="background: #7c3aed; color: #ffffff; width: 32px; height: 32px; border: none; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.15s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                         </button>
                                         <form method="POST" action="{{ route('admin.job-applications.destroy', $app) }}" onsubmit="return confirm('Delete this job application permanently?')" style="display: inline;">
@@ -136,6 +140,19 @@
                 </div>
             </div>
 
+            {{-- CV Section in Modal --}}
+            <div id="cvWrap" style="margin-bottom: 20px; display: none; background: #f5f3ff; border: 1px solid #ddd6fe; padding: 14px; border-radius: 8px;">
+                <label style="font-size: 11px; color: #6d28d9; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 8px;">Candidate Resume / CV File</label>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a id="modalViewCvBtn" href="#" target="_blank" style="display: inline-flex; align-items: center; gap: 6px; background: #7c3aed; color: #ffffff; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 13px; text-decoration: none; box-shadow: 0 2px 5px rgba(124,58,237,0.3);">
+                        📄 Open & View CV (PDF)
+                    </a>
+                    <a id="modalDownloadCvBtn" href="#" style="display: inline-flex; align-items: center; gap: 6px; background: #ffffff; color: #334155; border: 1px solid #cbd5e1; padding: 8px 14px; border-radius: 6px; font-weight: 600; font-size: 13px; text-decoration: none;">
+                        📥 Download File
+                    </a>
+                </div>
+            </div>
+
             <div id="portfolioWrap" style="margin-bottom: 20px; display: none;">
                 <label style="font-size: 11px; color: #64748b; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 4px;">Portfolio / Website</label>
                 <a id="modalPortfolio" href="#" target="_blank" style="color: #4f46e5; text-decoration: underline; font-size: 13px; font-weight: 600;"></a>
@@ -153,12 +170,24 @@
     </div>
 
     <script>
-        function showApplicantDetails(name, email, phone, position, coverLetter, portfolio) {
+        function showApplicantDetails(name, email, phone, position, coverLetter, portfolio, viewCvUrl, downloadCvUrl) {
             document.getElementById('modalName').innerText = name;
             document.getElementById('modalPosition').innerText = 'Applied Position: ' + position;
             document.getElementById('modalEmail').innerText = email;
             document.getElementById('modalPhone').innerText = phone || '—';
             document.getElementById('modalCoverLetter').innerText = coverLetter || 'No cover letter provided.';
+
+            const cvWrap = document.getElementById('cvWrap');
+            const modalViewCvBtn = document.getElementById('modalViewCvBtn');
+            const modalDownloadCvBtn = document.getElementById('modalDownloadCvBtn');
+
+            if (viewCvUrl && viewCvUrl.trim() !== '') {
+                modalViewCvBtn.href = viewCvUrl;
+                modalDownloadCvBtn.href = downloadCvUrl;
+                cvWrap.style.display = 'block';
+            } else {
+                cvWrap.style.display = 'none';
+            }
 
             const portfolioWrap = document.getElementById('portfolioWrap');
             const modalPortfolio = document.getElementById('modalPortfolio');
