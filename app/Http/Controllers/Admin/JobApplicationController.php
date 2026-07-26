@@ -20,10 +20,26 @@ class JobApplicationController extends Controller
             $query->where('job_title', $request->query('job_title'));
         }
 
+        if ($request->filled('status')) {
+            $query->where('status', $request->query('status'));
+        }
+
         return view('admin.job_applications.index', [
             'applications' => $query->latest()->paginate(20),
             'selectedJobTitle' => $request->query('job_title'),
+            'selectedStatus' => $request->query('status'),
         ]);
+    }
+
+    public function updateStatus(Request $request, JobApplication $application): RedirectResponse
+    {
+        $validated = $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        $application->update(['status' => $validated['status']]);
+
+        return back()->with('success', 'Candidate status updated.');
     }
 
     public function downloadCv(JobApplication $application): StreamedResponse|RedirectResponse

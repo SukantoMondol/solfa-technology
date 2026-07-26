@@ -61,6 +61,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('team-members', Admin\TeamMemberController::class)->except(['show']);
 
         Route::get('/job-applications', [Admin\JobApplicationController::class, 'index'])->name('job-applications.index');
+        Route::patch('/job-applications/{application}/status', [Admin\JobApplicationController::class, 'updateStatus'])->name('job-applications.update-status');
         Route::get('/job-applications/{application}/download', [Admin\JobApplicationController::class, 'downloadCv'])->name('job-applications.download');
         Route::delete('/job-applications/{application}', [Admin\JobApplicationController::class, 'destroy'])->name('job-applications.destroy');
 

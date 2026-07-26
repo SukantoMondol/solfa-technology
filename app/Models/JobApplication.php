@@ -14,5 +14,6 @@ class JobApplication extends Model
         'cv_path',
         'portfolio_link',
         'cover_letter',
+        'status',
     ];
 }
