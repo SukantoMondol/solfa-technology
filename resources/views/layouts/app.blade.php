@@ -550,14 +550,12 @@
                 document.getElementById('successSummaryText').innerText = `📅 ${data.meeting.date} at ${data.meeting.time}`;
                 document.getElementById('schedulerStepSuccess').style.display = 'block';
             } else {
-                alert("Something went wrong. Please check your inputs.");
+                alert(data.message || "Something went wrong. Please check your inputs.");
             }
         })
         .catch(err => {
             console.error(err);
-            alert("Meeting booked successfully!");
-            document.getElementById('schedulerStepForm').style.display = 'none';
-            document.getElementById('schedulerStepSuccess').style.display = 'block';
+            alert("Something went wrong. Please check your internet connection.");
         });
     }
     </script>

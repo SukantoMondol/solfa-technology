@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobOpening;
+use App\Models\JobApplication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -12,8 +13,14 @@ class JobController extends Controller
 {
     public function index(): View
     {
+        $jobs = JobOpening::latest()->paginate(20);
+
+        foreach ($jobs as $job) {
+            $job->applications_count = JobApplication::where('job_title', $job->title)->count();
+        }
+
         return view('admin.jobs.index', [
-            'jobs' => JobOpening::latest()->paginate(20),
+            'jobs' => $jobs,
         ]);
     }
 

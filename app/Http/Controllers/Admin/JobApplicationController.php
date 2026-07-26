@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -11,10 +12,17 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class JobApplicationController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $query = JobApplication::query();
+
+        if ($request->filled('job_title')) {
+            $query->where('job_title', $request->query('job_title'));
+        }
+
         return view('admin.job_applications.index', [
-            'applications' => JobApplication::latest()->paginate(20),
+            'applications' => $query->latest()->paginate(20),
+            'selectedJobTitle' => $request->query('job_title'),
         ]);
     }
 
