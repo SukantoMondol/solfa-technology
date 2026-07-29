@@ -63,6 +63,7 @@
             <div class="container">
                 <div class="career-positions-header" data-aos="fade-up">
                     <h2 class="career-heading">Find Your Ideal Role</h2>
+                    <p class="career-positions-sub">Click on any role or "View Description" to read full job requirements</p>
                 </div>
 
                 @if(session('success'))
@@ -73,72 +74,135 @@
 
                 <div class="job-list-container">
                     @forelse ($jobs as $job)
-                        <div class="job-listing-card" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-                            <!-- Left Info -->
-                            <div class="job-card-left">
-                                <h3 class="job-title">{{ $job->title }}</h3>
-                                <div class="job-meta-pills">
-                                    @if($job->location)
-                                        <span class="meta-pill">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2">
-                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                <circle cx="12" cy="10" r="3"></circle>
-                                            </svg>
-                                            {{ $job->location }}
+                        <div class="job-listing-card" id="job-card-{{ $job->id }}" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+                            <!-- Main Card Header (Clickable) -->
+                            <div class="job-card-main" onclick="toggleJobDetails({{ $job->id }})">
+                                <!-- Left Info -->
+                                <div class="job-card-left">
+                                    <h3 class="job-title">
+                                        <span>{{ $job->title }}</span>
+                                        <span class="job-desc-hint-badge">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                            View Description
                                         </span>
-                                    @endif
-                                    @if($job->type)
-                                        <span class="meta-pill">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2">
-                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                                <circle cx="12" cy="7" r="4"></circle>
-                                            </svg>
-                                            {{ $job->type }}
-                                        </span>
-                                    @endif
-                                    @if($job->workplace_type)
-                                        <span class="meta-pill">
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2">
-                                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                                <line x1="8" y1="21" x2="16" y2="21"></line>
-                                                <line x1="12" y1="17" x2="12" y2="21"></line>
-                                            </svg>
-                                            {{ $job->workplace_type }}
-                                        </span>
-                                    @endif
+                                    </h3>
+                                    <div class="job-meta-pills">
+                                        @if($job->location)
+                                            <span class="meta-pill">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                                    <circle cx="12" cy="10" r="3"></circle>
+                                                </svg>
+                                                {{ $job->location }}
+                                            </span>
+                                        @endif
+                                        @if($job->type)
+                                            <span class="meta-pill">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                    <circle cx="12" cy="7" r="4"></circle>
+                                                </svg>
+                                                {{ $job->type }}
+                                            </span>
+                                        @endif
+                                        @if($job->workplace_type)
+                                            <span class="meta-pill">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2">
+                                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                                </svg>
+                                                {{ $job->workplace_type }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- Middle Info -->
+                                <div class="job-card-middle">
+                                    <div class="job-deadline">
+                                        {{ $job->deadline ? $job->deadline->format('d F, Y') : 'Open until filled' }}
+                                    </div>
+                                    <div class="job-vacancies">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                        No of vacancies: {{ $job->vacancies ?? 1 }}
+                                    </div>
+                                </div>
+
+                                <!-- Right Action Button -->
+                                <div class="job-card-right" onclick="event.stopPropagation();">
+                                    <button type="button" class="btn-view-details" id="btn-toggle-{{ $job->id }}" onclick="toggleJobDetails({{ $job->id }})">
+                                        <span class="btn-toggle-label">View Details</span>
+                                        <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </button>
+                                    <button type="button" class="btn-apply-now" onclick="openApplyModal('{{ e($job->title) }}')">
+                                        Apply Now
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
 
-                            <!-- Middle Info -->
-                            <div class="job-card-middle">
-                                <div class="job-deadline">
-                                    {{ $job->deadline ? $job->deadline->format('d F, Y') : 'Open until filled' }}
-                                </div>
-                                <div class="job-vacancies">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="9" cy="7" r="4"></circle>
-                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                    </svg>
-                                    No of vacancies: {{ $job->vacancies ?? 1 }}
-                                </div>
-                            </div>
+                            <!-- Expandable Job Details Drawer -->
+                            <div class="job-card-details-drawer" id="job-details-{{ $job->id }}" style="display: none;">
+                                <div class="job-details-content-box">
+                                    @if($job->summary)
+                                        <div class="job-summary-callout">
+                                            <div class="callout-icon">💡</div>
+                                            <div class="callout-text">
+                                                <strong>Role Overview:</strong>
+                                                <p>{{ $job->summary }}</p>
+                                            </div>
+                                        </div>
+                                    @endif
 
-                            <!-- Right Action Button -->
-                            <div class="job-card-right">
-                                <button type="button" class="btn-apply-now" onclick="openApplyModal('{{ e($job->title) }}')">
-                                    Apply Now
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="22" y1="2" x2="11" y2="13"></line>
-                                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                                    </svg>
-                                </button>
+                                    <div class="job-description-section">
+                                        <h4>Job Description & Requirements:</h4>
+                                        <div class="job-description-body">
+                                            {!! nl2br(e($job->description)) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="job-details-footer-bar">
+                                        <div class="job-footer-meta">
+                                            @if($job->salary)
+                                                <span class="footer-meta-item">
+                                                    <strong>Salary:</strong> {{ $job->salary }}
+                                                </span>
+                                            @endif
+                                            @if($job->deadline)
+                                                <span class="footer-meta-item">
+                                                    <strong>Deadline:</strong> {{ $job->deadline->format('d F, Y') }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        <div class="job-footer-btns">
+                                            <a href="{{ route('careers.show', $job->slug) }}" class="btn-full-page-link">
+                                                Full Details Page ↗
+                                            </a>
+                                            <button type="button" class="btn-apply-now" onclick="openApplyModal('{{ e($job->title) }}')">
+                                                Apply For This Role
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @empty
@@ -289,6 +353,30 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
+        function toggleJobDetails(id) {
+            const drawer = document.getElementById('job-details-' + id);
+            const btn = document.getElementById('btn-toggle-' + id);
+            const card = document.getElementById('job-card-' + id);
+
+            if (!drawer) return;
+
+            if (drawer.style.display === 'none' || drawer.style.display === '') {
+                drawer.style.display = 'block';
+                if (card) card.classList.add('expanded');
+                if (btn) {
+                    btn.querySelector('.btn-toggle-label').textContent = 'Hide Details';
+                    btn.classList.add('active');
+                }
+            } else {
+                drawer.style.display = 'none';
+                if (card) card.classList.remove('expanded');
+                if (btn) {
+                    btn.querySelector('.btn-toggle-label').textContent = 'View Details';
+                    btn.classList.remove('active');
+                }
+            }
+        }
+
         function openApplyModal(title) {
             document.getElementById('modalJobTitle').innerText = title;
             document.getElementById('modalJobTitleInput').value = title;
