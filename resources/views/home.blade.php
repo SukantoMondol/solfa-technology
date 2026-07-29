@@ -294,7 +294,7 @@
 
             <div class="projects-grid">
                 @foreach ($projects as $project)
-                    <article class="project-card" data-category="{{ $project->category }}">
+                    <article class="project-card" data-category="{{ $project->category }}" style="cursor: pointer;" onclick="window.location.href='{{ route('projects.show', $project->slug) }}'">
                         <div class="project-thumb-box">
                             @if ($project->image)
                                 <img src="{{ asset($project->image) }}" alt="{{ $project->title }}" class="project-img">
@@ -304,26 +304,24 @@
                                 </div>
                             @endif
 
-                            @if($project->website_url)
-                                <div class="project-overlay-glow">
-                                    <a href="{{ $project->website_url }}" target="_blank" class="project-visit-btn">
-                                        <span>Visit Live Site</span>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                                    </a>
-                                </div>
-                            @endif
+                            <div class="project-overlay-glow">
+                                <a href="{{ route('projects.show', $project->slug) }}" class="project-visit-btn">
+                                    <span>View Case Study &rarr;</span>
+                                </a>
+                            </div>
                         </div>
                         <div class="project-body">
                             <span class="project-cat-badge">{{ $project->category }}</span>
-                            <h3 class="project-card-title">{{ $project->title }}</h3>
+                            <h3 class="project-card-title">
+                                <a href="{{ route('projects.show', $project->slug) }}" style="color: inherit; text-decoration: none;">
+                                    {{ $project->title }}
+                                </a>
+                            </h3>
                             <div class="project-card-footer">
                                 <span class="project-client">@if ($project->client) Client: {{ $project->client }} @endif</span>
-                                @if($project->website_url)
-                                    <a href="{{ $project->website_url }}" target="_blank" class="project-card-link">
-                                        <span>Live Demo</span>
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                                    </a>
-                                @endif
+                                <a href="{{ route('projects.show', $project->slug) }}" class="project-card-link" style="color: var(--primary); font-weight: 700;">
+                                    <span>View Details &rarr;</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -531,11 +529,15 @@
                             </p>
                             <p class="testimonial-quote-text">"{{ $testimonial->quote }}"</p>
                             <footer class="testimonial-who">
-                                <span class="testimonial-avatar" aria-hidden="true">{{ strtoupper(substr($testimonial->name, 0, 1)) }}</span>
                                 <div class="testimonial-details">
                                     <h3>{{ $testimonial->name }}</h3>
                                     <p>{{ $testimonial->position }}@if($testimonial->company), {{ $testimonial->company }}@endif</p>
                                 </div>
+                                @if ($testimonial->avatar)
+                                    <img src="{{ asset($testimonial->avatar) }}" alt="{{ $testimonial->name }}" class="testimonial-avatar-img">
+                                @else
+                                    <span class="testimonial-avatar" aria-hidden="true">{{ strtoupper(substr($testimonial->name, 0, 1)) }}</span>
+                                @endif
                             </footer>
                         </blockquote>
                     @endforeach
@@ -548,11 +550,15 @@
                             </p>
                             <p class="testimonial-quote-text">"{{ $testimonial->quote }}"</p>
                             <footer class="testimonial-who">
-                                <span class="testimonial-avatar" aria-hidden="true">{{ strtoupper(substr($testimonial->name, 0, 1)) }}</span>
                                 <div class="testimonial-details">
                                     <h3>{{ $testimonial->name }}</h3>
                                     <p>{{ $testimonial->position }}@if($testimonial->company), {{ $testimonial->company }}@endif</p>
                                 </div>
+                                @if ($testimonial->avatar)
+                                    <img src="{{ asset($testimonial->avatar) }}" alt="{{ $testimonial->name }}" class="testimonial-avatar-img">
+                                @else
+                                    <span class="testimonial-avatar" aria-hidden="true">{{ strtoupper(substr($testimonial->name, 0, 1)) }}</span>
+                                @endif
                             </footer>
                         </blockquote>
                     @endforeach
@@ -571,7 +577,7 @@
                 </div>
                 <div class="projects-grid">
                     @foreach ($featuredProjects as $project)
-                        <article class="project-card">
+                        <article class="project-card" data-category="{{ $project->category }}" style="cursor: pointer;" onclick="window.location.href='{{ route('projects.show', $project->slug) }}'">
                             <div class="project-thumb-box">
                                 @if ($project->image)
                                     <img src="{{ asset($project->image) }}" alt="{{ $project->title }}" class="project-img">
@@ -581,27 +587,25 @@
                                     </div>
                                 @endif
 
-                                @if($project->website_url)
-                                    <div class="project-overlay-glow">
-                                        <a href="{{ $project->website_url }}" target="_blank" class="project-visit-btn">
-                                            <span>Visit Live Site</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                                        </a>
-                                    </div>
-                                @endif
+                                <div class="project-overlay-glow">
+                                    <a href="{{ route('projects.show', $project->slug) }}" class="project-visit-btn">
+                                        <span>View Case Study &rarr;</span>
+                                    </a>
+                                </div>
                             </div>
                             <div class="project-body">
                                 <span class="project-cat-badge">{{ $project->category }}</span>
-                                <h3 class="project-card-title">{{ $project->title }}</h3>
-                                <p class="project-card-desc-modern" style="font-size: 0.92rem; line-height: 1.55; color: var(--body); margin-bottom: 20px;">{{ $project->description }}</p>
+                                <h3 class="project-card-title">
+                                    <a href="{{ route('projects.show', $project->slug) }}" style="color: inherit; text-decoration: none;">
+                                        {{ $project->title }}
+                                    </a>
+                                </h3>
+                                <p class="project-card-desc-modern" style="font-size: 0.92rem; line-height: 1.55; color: var(--body); margin-bottom: 20px;">{{ Str::limit($project->description, 120) }}</p>
                                 <div class="project-card-footer">
                                     <span class="project-client">@if ($project->client) Client: {{ $project->client }} @endif</span>
-                                    @if($project->website_url)
-                                        <a href="{{ $project->website_url }}" target="_blank" class="project-card-link">
-                                            <span>Live Demo</span>
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                                        </a>
-                                    @endif
+                                    <a href="{{ route('projects.show', $project->slug) }}" class="project-card-link" style="color: var(--primary); font-weight: 700;">
+                                        <span>Read More &rarr;</span>
+                                    </a>
                                 </div>
                             </div>
                         </article>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="card">
-        <form method="POST" action="{{ $testimonial->exists ? route('admin.testimonials.update', $testimonial) : route('admin.testimonials.store') }}">
+        <form method="POST" action="{{ $testimonial->exists ? route('admin.testimonials.update', $testimonial) : route('admin.testimonials.store') }}" enctype="multipart/form-data">
             @csrf
             @if ($testimonial->exists)
                 @method('PUT')
@@ -35,6 +35,28 @@
                     <label for="sort_order">Sort order</label>
                     <input type="number" id="sort_order" name="sort_order" min="0" value="{{ old('sort_order', $testimonial->sort_order ?? 0) }}">
                 </div>
+
+                <div class="field">
+                    <label for="avatar_file">Upload Client Picture</label>
+                    <input type="file" id="avatar_file" name="avatar_file" accept="image/*">
+                    <small style="color: #6c757d; font-size: 0.78rem; margin-top: 4px; display: block;">Max size: 2MB (JPG, PNG, WEBP, GIF)</small>
+                </div>
+
+                <div class="field">
+                    <label for="avatar">Or Image Path/URL</label>
+                    <input type="text" id="avatar" name="avatar" placeholder="images/client1.jpg" value="{{ old('avatar', $testimonial->avatar) }}">
+                    <small style="color: #6c757d; font-size: 0.78rem; margin-top: 4px; display: block;">Or enter an image path manually</small>
+                </div>
+
+                @if($testimonial->avatar)
+                    <div class="field full">
+                        <label>Current Client Picture</label>
+                        <div style="margin-top: 8px; display: flex; align-items: center; gap: 12px;">
+                            <img src="{{ asset($testimonial->avatar) }}" alt="Preview" style="width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary);">
+                            <span style="font-size: 0.85rem; color: var(--body);">{{ $testimonial->avatar }}</span>
+                        </div>
+                    </div>
+                @endif
 
                 <div class="field full">
                     <label for="quote">Quote *</label>

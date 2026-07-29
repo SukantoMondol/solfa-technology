@@ -50,13 +50,29 @@ class PostController extends Controller
 
     private function validated(Request $request, ?int $id = null): array
     {
-        return $request->validate([
+        $data = $request->validate([
             'title' => ['required', 'string', 'max:190'],
             'slug' => ['nullable', 'string', 'max:190', 'unique:posts,slug,'.($id ?? 'NULL')],
             'excerpt' => ['nullable', 'string', 'max:1000'],
             'body' => ['nullable', 'string'],
+            'image' => ['nullable', 'string', 'max:255'],
+            'image_file' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp,gif', 'max:2048'],
             'author' => ['nullable', 'string', 'max:120'],
             'published_at' => ['nullable', 'date'],
+        ], [
+            'image_file.max' => 'The image size must be under 2MB.',
+            'image_file.uploaded' => 'The image failed to upload because it exceeds PHP limit (2MB).',
         ]);
+
+        if ($request->hasFile('image_file')) {
+            $file = $request->file('image_file');
+            $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\._-]/', '', $file->getClientOriginalName());
+            $file->move(public_path('uploads/posts'), $filename);
+            $data['image'] = 'uploads/posts/' . $filename;
+        }
+
+        unset($data['image_file']);
+
+        return $data;
     }
 }

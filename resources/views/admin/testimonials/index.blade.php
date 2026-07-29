@@ -16,6 +16,7 @@
                 <table class="admin-table">
                     <thead>
                         <tr>
+                            <th>Picture</th>
                             <th>Name</th>
                             <th>Company</th>
                             <th>Rating</th>
@@ -26,6 +27,15 @@
                     <tbody>
                         @foreach ($testimonials as $testimonial)
                             <tr>
+                                <td>
+                                    @if ($testimonial->avatar)
+                                        <img src="{{ asset($testimonial->avatar) }}" alt="{{ $testimonial->name }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                    @else
+                                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">
+                                            {{ strtoupper(substr($testimonial->name, 0, 1)) }}
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>{{ $testimonial->name }}</td>
                                 <td>{{ $testimonial->company ?? '—' }}</td>
                                 <td>{{ $testimonial->rating }}/5</td>

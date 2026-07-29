@@ -49,7 +49,7 @@
                 @endif
                 
                 <div class="blog-details-prose">
-                    {!! nl2br(e($post->body)) !!}
+                    {!! $post->body !!}
                 </div>
                 
                 <div class="blog-details-footer-cta">

@@ -32,4 +32,27 @@ class PageController extends Controller
             'teamMembers' => TeamMember::orderBy('sort_order', 'asc')->get(),
         ]);
     }
+
+    public function showProject(Project $project): View
+    {
+        abort_unless($project->is_active, 404);
+
+        $relatedProjects = Project::active()
+            ->where('id', '!=', $project->id)
+            ->where('category', $project->category)
+            ->take(3)
+            ->get();
+
+        if ($relatedProjects->isEmpty()) {
+            $relatedProjects = Project::active()
+                ->where('id', '!=', $project->id)
+                ->take(3)
+                ->get();
+        }
+
+        return view('projects.show', [
+            'project' => $project,
+            'relatedProjects' => $relatedProjects,
+        ]);
+    }
 }

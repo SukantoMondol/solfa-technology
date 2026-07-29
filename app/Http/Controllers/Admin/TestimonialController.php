@@ -55,9 +55,24 @@ class TestimonialController extends Controller
             'position' => ['nullable', 'string', 'max:190'],
             'company' => ['nullable', 'string', 'max:190'],
             'quote' => ['required', 'string', 'max:2000'],
+            'avatar' => ['nullable', 'string', 'max:255'],
+            'avatar_file' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp,gif', 'max:2048'],
             'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'avatar_file.max' => 'The uploaded picture size must be under 2MB. Please select an image smaller than 2MB.',
+            'avatar_file.uploaded' => 'The picture failed to upload because it exceeds PHP upload limit (2MB). Please select a picture smaller than 2MB.',
+            'avatar_file.image' => 'The uploaded file must be a valid image (JPG, PNG, WEBP, GIF).',
         ]);
+
+        if ($request->hasFile('avatar_file')) {
+            $file = $request->file('avatar_file');
+            $filename = time() . '_' . preg_replace('/[^A-Za-z0-9\._-]/', '', $file->getClientOriginalName());
+            $file->move(public_path('uploads/testimonials'), $filename);
+            $data['avatar'] = 'uploads/testimonials/' . $filename;
+        }
+
+        unset($data['avatar_file']);
 
         $data['is_active'] = $request->boolean('is_active');
         $data['rating'] = $data['rating'] ?? 5;
